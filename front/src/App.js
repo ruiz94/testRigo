@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { storeProducts } from './slices/productsSlice'
+import Products from './components/Products'
+import './App.css'
 
 const App = () => {
-  // store response from server
-  const [response, setResponse] = useState('')
+  const products = useSelector((state) => state.products.values)
+  const dispatch = useDispatch()
 
-  // call server to see if its running
   useEffect(() => {
     const getApiResponse = () => {
-      fetch('http://localhost:5000/')
-        .then((res) => res.text())
-        .then((res) => setResponse(res))
+      fetch('http://localhost:5000/api/products')
+        .then((res) => res.json())
+        .then((res) => {
+          dispatch(storeProducts(res))
+        })
     }
     getApiResponse()
   }, [])
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1> Prueba tecnica front Ecomsur 2021</h1>
-      <p>Borra esto y comienza aqui.</p>
-      {/* Check to see if express server is running correctly */}
-      <h5>{response}</h5>
+    <div className='container' style={{ textAlign: 'center' }}>
+      <Products products={products} />
     </div>
   )
 }

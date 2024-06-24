@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+*{
+  box-sizing: border-box;
+  color: #585858;
+}
+button{
+  color: #2a2a2a;
+  cursor: pointer;
+}
+.main{
+  max-width: 1200px;
+  position: relative;
+  min-height: 100vh;
+  margin: auto;
+  min-width: 400px;
+}
+
+
+
+@media screen and (min-width: 600px) {
+  .productsWrapper{
+    display: grid;
+    grid-template-columns: repeat(2, 250px);
+    gap: 1rem;
+  }
+  
+}
+
+@media screen and (min-width: 850px) {
+  .productsWrapper{
+    grid-template-columns: repeat(3, 250px);
+  }
+  
+}
